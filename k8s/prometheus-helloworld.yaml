@@ -1,0 +1,25 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: Prometheus
+metadata:
+  name: hello-world
+  labels:
+    prometheus: hello-world
+  namespace: tectonic-demo
+spec:
+  replicas: 2
+  version: v1.7.1
+  serviceAccountName: prometheus-helloworld
+  serviceMonitorSelector:
+    matchLabels:
+      app: hello-world
+  ruleSelector:
+    matchLabels:
+      prometheus: hello-world
+  resources:
+    requests:
+      memory: 400Mi
+  alerting:
+    alertmanagers:
+      - namespace: tectonic-system
+        name: alertmanager-main
+        port: web

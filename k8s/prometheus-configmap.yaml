@@ -1,0 +1,17 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: hello-world
+  labels:
+    prometheus: hello-world
+  namespace: tectonic-demo
+data:
+  alerting.rules: |
+    # Alert for any instance that have a median request latency >1s.
+    ALERT APIHighRequestLatency
+      IF rate(flask_request_latency_seconds_sum[1m]) / rate(flask_request_latency_seconds_count[1m]) > 1 
+      FOR 10s
+      ANNOTATIONS {
+        summary = "High request latency on {{ $labels.instance }}",
+        description = "{{ $labels.instance }} has a median request latency above 1s (current value: {{ $value }}s)",
+      }
