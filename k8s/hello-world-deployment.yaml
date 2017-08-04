@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: hello-world
-        image: quay.io/jordan_cooks/hello-world-demo
+        image: quay.io/jordan_cooks/hello-world-demo:latency
         imagePullPolicy: Always
         ports:
         - name: web
