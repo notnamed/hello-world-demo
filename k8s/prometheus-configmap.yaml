@@ -9,7 +9,7 @@ data:
   alerting.rules: |
     # Alert for any instance that have a median request latency >1s.
     ALERT APIHighRequestLatency
-      IF rate(flask_request_latency_seconds_sum[1m]) / rate(flask_request_latency_seconds_count[1m]) > 1 
+      IF rate(flask_request_latency_seconds_sum[10s]) / rate(flask_request_latency_seconds_count[10s]) > 1 
       FOR 10s
       ANNOTATIONS {
         summary = "High request latency on {{ $labels.instance }}",
