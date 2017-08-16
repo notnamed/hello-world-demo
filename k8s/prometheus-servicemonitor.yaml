@@ -8,6 +8,7 @@ metadata:
 spec:
   endpoints:
   - port: metrics
+    interval: 1s
   selector:
     matchLabels:
       app: hello-world
