@@ -1,0 +1,18 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: prom-ingress
+  namespace: tectonic-demo
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    ingress.kubernetes.io/ssl-redirect: 'true'
+    ingress.kubernetes.io/use-port-in-redirects: 'true'
+    kubernetes.io/ingress.class: tectonic
+spec:
+  rules:
+    - host: prometheus-hello-world.scottsumner.net
+      http:
+        paths:
+          - backend:
+              serviceName: prometheus-hello-world
+              servicePort: 9090
